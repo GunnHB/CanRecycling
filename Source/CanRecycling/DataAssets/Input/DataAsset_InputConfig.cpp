@@ -3,3 +3,13 @@
 
 #include "DataAsset_InputConfig.h"
 
+UInputAction* UDataAsset_InputConfig::FindNativeInputActionByTag(const FGameplayTag& InInputTag) const
+{
+	for (const FCRInputActionConfig& InputActionConfig : NativeInputActions)
+	{
+		if (InputActionConfig.InputTag == InInputTag && InputActionConfig.InputAction != nullptr)
+			return InputActionConfig.InputAction;
+	}
+
+	return nullptr;
+}
