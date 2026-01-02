@@ -6,6 +6,9 @@
 #include "GameFramework/Pawn.h"
 #include "CRGoKartBase.generated.h"
 
+class USpringArmComponent;
+class UCameraComponent;
+
 UCLASS()
 class CANRECYCLING_API ACRGoKartBase : public APawn
 {
@@ -25,4 +28,14 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Mesh")
+	TObjectPtr<USkeletalMeshComponent> SkeletalMeshComponent = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Camera")
+	TObjectPtr<USpringArmComponent> SpringArmComponent = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Camera")
+	TObjectPtr<UCameraComponent> CameraComponent = nullptr;
 };
