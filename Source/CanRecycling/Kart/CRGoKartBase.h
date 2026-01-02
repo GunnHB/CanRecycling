@@ -6,6 +6,8 @@
 #include "GameFramework/Pawn.h"
 #include "CRGoKartBase.generated.h"
 
+struct FInputActionValue;
+class UDataAsset_InputConfig;
 class USpringArmComponent;
 class UCameraComponent;
 
@@ -30,12 +32,17 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 protected:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Mesh")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Component|Mesh")
 	TObjectPtr<USkeletalMeshComponent> SkeletalMeshComponent = nullptr;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Camera")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Component|Camera")
 	TObjectPtr<USpringArmComponent> SpringArmComponent = nullptr;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Camera")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Component|Camera")
 	TObjectPtr<UCameraComponent> CameraComponent = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Data|Input")
+	TObjectPtr<UDataAsset_InputConfig> InputConfigDataAsset = nullptr;
+
+	void Input_Throttle(const FInputActionValue& Value);
 };
