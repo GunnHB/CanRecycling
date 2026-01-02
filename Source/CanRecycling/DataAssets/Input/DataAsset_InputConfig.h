@@ -1,0 +1,45 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
+#include "Engine/DataAsset.h"
+#include "DataAsset_InputConfig.generated.h"
+
+class UInputMappingContext;
+class UInputAction;
+
+USTRUCT(BlueprintType)
+struct FCRInputActionConfig
+{
+	GENERATED_BODY()
+
+public:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta=(Categories="InputTag"))
+	FGameplayTag InputTag;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TObjectPtr<UInputAction> InputAction = nullptr;
+
+	bool  IsValid() const
+	{
+		return InputTag.IsValid() && InputAction;
+	}
+};
+
+/**
+ * 
+ */
+UCLASS()
+class CANRECYCLING_API UDataAsset_InputConfig : public UDataAsset
+{
+	GENERATED_BODY()
+
+public:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TObjectPtr<UInputMappingContext> DefaultMappingContext = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta=(TitleProperty="InputTag"))
+	TArray<FCRInputActionConfig> NativeInputActions;
+};
