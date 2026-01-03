@@ -3,6 +3,7 @@
 
 #include "CRGoKartBase.h"
 
+#include "ChaosWheeledVehicleMovementComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "Camera/CameraComponent.h"
 #include "CanRecycling/CRGameplayTags.h"
@@ -20,12 +21,15 @@ ACRGoKartBase::ACRGoKartBase()
 	
 	SkeletalMeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("SkeletalMeshComponent"));
 	SetRootComponent(SkeletalMeshComponent);
+	SkeletalMeshComponent->SetSimulatePhysics(true);
 
 	SpringArmComponent = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArmComponent"));
 	SpringArmComponent->SetupAttachment(SkeletalMeshComponent);
 
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComponent"));
 	CameraComponent->SetupAttachment(SpringArmComponent);
+
+	VehicleMovementComponent = CreateDefaultSubobject<UChaosWheeledVehicleMovementComponent>(TEXT("VehicleMovementComponent"));
 }
 
 // Called when the game starts or when spawned
@@ -62,5 +66,7 @@ void ACRGoKartBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 
 void ACRGoKartBase::Input_Throttle(const FInputActionValue& Value)
 {
-	// const FVector2D ThrottleVector = Value.Get<FVector2D>();
+	const float Throttle = Value.Get<float>();
+
+	VehicleMovementComponent->SetThrottleInput(Throttle);
 }

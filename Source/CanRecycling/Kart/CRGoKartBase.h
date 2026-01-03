@@ -6,6 +6,7 @@
 #include "GameFramework/Pawn.h"
 #include "CRGoKartBase.generated.h"
 
+class UChaosWheeledVehicleMovementComponent;
 struct FInputActionValue;
 class UDataAsset_InputConfig;
 class USpringArmComponent;
@@ -40,6 +41,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Component|Camera")
 	TObjectPtr<UCameraComponent> CameraComponent = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Component|Movement")
+	TObjectPtr<UChaosWheeledVehicleMovementComponent> VehicleMovementComponent = nullptr;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Data|Input")
 	TObjectPtr<UDataAsset_InputConfig> InputConfigDataAsset = nullptr;
