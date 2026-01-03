@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "InputActionValue.h"
 #include "GameFramework/Pawn.h"
 #include "CRGoKartBase.generated.h"
 
@@ -49,4 +50,5 @@ protected:
 	TObjectPtr<UDataAsset_InputConfig> InputConfigDataAsset = nullptr;
 
 	void Input_Throttle(const FInputActionValue& Value);
+	void Input_Brake(const FInputActionValue& Value);
 };
