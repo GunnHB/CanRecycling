@@ -1,5 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "CRSportKart.h"
+#include "CRSportsKart.h"
 
+ACRSportsKart::ACRSportsKart()
+{
+}

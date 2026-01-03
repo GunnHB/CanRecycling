@@ -4,14 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "CRGoKartBase.h"
-#include "CRSportKart.generated.h"
+#include "CRSportsKart.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class CANRECYCLING_API ACRSportKart : public ACRGoKartBase
+class CANRECYCLING_API ACRSportsKart : public ACRGoKartBase
 {
 	GENERATED_BODY()
-	
+
+public:
+	ACRSportsKart();
 };
