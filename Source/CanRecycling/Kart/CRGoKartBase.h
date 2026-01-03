@@ -49,6 +49,13 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Data|Input")
 	TObjectPtr<UDataAsset_InputConfig> InputConfigDataAsset = nullptr;
 
+	UFUNCTION(BlueprintImplementableEvent, Category="Vehicle")
+	void BrakeLights(bool bBraking);
+
+	
 	void Input_Throttle(const FInputActionValue& Value);
+	
 	void Input_Brake(const FInputActionValue& Value);
+	void Input_StartBrake(const FInputActionValue& Value);
+	void Input_StopBrake(const FInputActionValue& Value);
 };

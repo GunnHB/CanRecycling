@@ -65,6 +65,8 @@ void ACRGoKartBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	CRInputComponent->BindNativeInputAction(InputConfigDataAsset, CRGameplayTag::InputTag_Throttle, ETriggerEvent::Completed, this, &ACRGoKartBase::Input_Throttle);
 
 	CRInputComponent->BindNativeInputAction(InputConfigDataAsset, CRGameplayTag::InputTag_Brake, ETriggerEvent::Triggered, this, &ACRGoKartBase::Input_Brake);
+	CRInputComponent->BindNativeInputAction(InputConfigDataAsset, CRGameplayTag::InputTag_Brake, ETriggerEvent::Started, this, &ACRGoKartBase::Input_StartBrake);
+	CRInputComponent->BindNativeInputAction(InputConfigDataAsset, CRGameplayTag::InputTag_Brake, ETriggerEvent::Completed, this, &ACRGoKartBase::Input_StopBrake);
 }
 
 void ACRGoKartBase::Input_Throttle(const FInputActionValue& Value)
@@ -79,4 +81,16 @@ void ACRGoKartBase::Input_Brake(const FInputActionValue& Value)
 	const float Brake = Value.Get<float>();
 
 	VehicleMovementComponent->SetBrakeInput(Brake);
+}
+
+void ACRGoKartBase::Input_StartBrake(const FInputActionValue& Value)
+{
+	BrakeLights(true);
+}
+
+void ACRGoKartBase::Input_StopBrake(const FInputActionValue& Value)
+{
+	BrakeLights(false);
+
+	VehicleMovementComponent->SetBrakeInput(0.f);
 }
