@@ -34,16 +34,16 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 protected:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Component|Mesh")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Components|Core")
 	TObjectPtr<USkeletalMeshComponent> SkeletalMeshComponent = nullptr;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Component|Camera")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Components|Camera")
 	TObjectPtr<USpringArmComponent> SpringArmComponent = nullptr;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Component|Camera")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Components|Camera")
 	TObjectPtr<UCameraComponent> CameraComponent = nullptr;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Component|Movement")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Components|Movement")
 	TObjectPtr<UChaosWheeledVehicleMovementComponent> VehicleMovementComponent = nullptr;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Data|Input")

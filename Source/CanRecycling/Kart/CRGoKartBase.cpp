@@ -21,9 +21,10 @@ ACRGoKartBase::ACRGoKartBase()
 	SetReplicates(true);
 	
 	SkeletalMeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("SkeletalMeshComponent"));
-	SetRootComponent(SkeletalMeshComponent);
 	SkeletalMeshComponent->SetSimulatePhysics(true);
 	SkeletalMeshComponent->SetCollisionProfileName(FName("Vehicle"));
+	SkeletalMeshComponent->SetGenerateOverlapEvents(true);
+	SetRootComponent(SkeletalMeshComponent);
 
 	SpringArmComponent = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArmComponent"));
 	SpringArmComponent->SetupAttachment(SkeletalMeshComponent);
