@@ -7,6 +7,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "Camera/CameraComponent.h"
 #include "CanRecycling/CRGameplayTags.h"
+#include "CanRecycling/DebugHelper.h"
 #include "CanRecycling/Components/Input/CREnhancedInputComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "CanRecycling/DataAssets/Input/DataAsset_InputConfig.h"
@@ -76,20 +77,23 @@ void ACRGoKartBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	CRInputComponent->BindNativeInputAction(InputConfigDataAsset, CRGameplayTag::InputTag_Brake, ETriggerEvent::Triggered, this, &ACRGoKartBase::Input_Brake);
 	CRInputComponent->BindNativeInputAction(InputConfigDataAsset, CRGameplayTag::InputTag_Brake, ETriggerEvent::Started, this, &ACRGoKartBase::Input_StartBrake);
 	CRInputComponent->BindNativeInputAction(InputConfigDataAsset, CRGameplayTag::InputTag_Brake, ETriggerEvent::Completed, this, &ACRGoKartBase::Input_StopBrake);
+
+	CRInputComponent->BindNativeInputAction(InputConfigDataAsset, CRGameplayTag::InputTag_Steering, ETriggerEvent::Triggered, this, &ACRGoKartBase::Input_Steering);
+	CRInputComponent->BindNativeInputAction(InputConfigDataAsset, CRGameplayTag::InputTag_Steering, ETriggerEvent::Completed, this, &ACRGoKartBase::Input_Steering);
 }
 
 void ACRGoKartBase::Input_Throttle(const FInputActionValue& Value)
 {
-	const float Throttle = Value.Get<float>();
+	const float ThrottleValue = Value.Get<float>();
 
-	VehicleMovementComponent->SetThrottleInput(Throttle);
+	VehicleMovementComponent->SetThrottleInput(ThrottleValue);
 }
 
 void ACRGoKartBase::Input_Brake(const FInputActionValue& Value)
 {
-	const float Brake = Value.Get<float>();
+	const float BrakeValue = Value.Get<float>();
 
-	VehicleMovementComponent->SetBrakeInput(Brake);
+	VehicleMovementComponent->SetBrakeInput(BrakeValue);
 }
 
 void ACRGoKartBase::Input_StartBrake(const FInputActionValue& Value)
@@ -102,4 +106,11 @@ void ACRGoKartBase::Input_StopBrake(const FInputActionValue& Value)
 	BrakeLights(false);
 
 	VehicleMovementComponent->SetBrakeInput(0.f);
+}
+
+void ACRGoKartBase::Input_Steering(const FInputActionValue& Value)
+{
+	const float SteeringValue = Value.Get<float>();
+
+	VehicleMovementComponent->SetSteeringInput(SteeringValue);
 }
