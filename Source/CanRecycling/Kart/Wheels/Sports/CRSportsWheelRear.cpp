@@ -9,6 +9,8 @@ UCRSportsWheelRear::UCRSportsWheelRear()
 	WheelWidth = 40.f;					// 바퀴 폭
 	FrictionForceMultiplier = 3.f;		// 마찰 배수
 
+	CorneringStiffness = 2000.f;
+
 	// 미끄러짐 임계 값
 	SlipThreshold = 100.f;
 	SkidThreshold = 100.f;
