@@ -48,7 +48,7 @@ ACRSportsKart::ACRSportsKart()
 	VehicleMovementComponent->TransmissionSetup.FinalRatio = 2.81f;				// 최종 감속비
 	VehicleMovementComponent->TransmissionSetup.ChangeUpRPM = 6000.0f;			// 기어 변경 시점 (올림)
 	VehicleMovementComponent->TransmissionSetup.ChangeDownRPM = 2000.0f;		// 기어 변경 시점 (내림)
-	VehicleMovementComponent->TransmissionSetup.GearChangeTime = 0.2f;			// 기어 변경 시간
+	VehicleMovementComponent->TransmissionSetup.GearChangeTime = 0.05f;			// 기어 변경 시간
 	VehicleMovementComponent->TransmissionSetup.TransmissionEfficiency = 0.9f;	// 동력 전달 효율
 
 	// 기어 단 세팅

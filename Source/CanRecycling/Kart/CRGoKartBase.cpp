@@ -22,9 +22,18 @@ ACRGoKartBase::ACRGoKartBase()
 	SkeletalMeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("SkeletalMeshComponent"));
 	SetRootComponent(SkeletalMeshComponent);
 	SkeletalMeshComponent->SetSimulatePhysics(true);
+	SkeletalMeshComponent->SetCollisionProfileName(FName("Vehicle"));
 
 	SpringArmComponent = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArmComponent"));
 	SpringArmComponent->SetupAttachment(SkeletalMeshComponent);
+	SpringArmComponent->TargetArmLength = 650.0f;
+	SpringArmComponent->SocketOffset.Z = 150.0f;
+	SpringArmComponent->bDoCollisionTest = false;
+	SpringArmComponent->bInheritPitch = false;
+	SpringArmComponent->bInheritRoll = false;
+	SpringArmComponent->bEnableCameraRotationLag = true;
+	SpringArmComponent->CameraRotationLagSpeed = 2.0f;
+	SpringArmComponent->CameraLagMaxDistance = 50.0f;
 
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComponent"));
 	CameraComponent->SetupAttachment(SpringArmComponent);
