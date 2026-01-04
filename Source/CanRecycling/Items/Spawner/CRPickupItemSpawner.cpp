@@ -23,7 +23,7 @@ void ACRPickupItemSpawner::BeginPlay()
 
 	checkf(ItemData, TEXT("Forgot to assign a valid data as item config"));
 
-	// todo: Register spawner with the subsystem
+	// Register spawner with the subsystem
 	if (HasAuthority() == false)
 		return;
 
@@ -40,6 +40,6 @@ void ACRPickupItemSpawner::SpawnItem()
 	FActorSpawnParameters SpawnParams;
 	
 	SpawnedItem = GetWorld()->SpawnActor<ACRPickupItem>(ItemData->PickupItemClass, GetActorLocation(), GetActorRotation(), SpawnParams);
-	if (IsValid(SpawnedItem))
-		SpawnedItem->SetActorHiddenInGame(true);
+	// if (IsValid(SpawnedItem))
+	// 	SpawnedItem->SetActive(false);
 }
