@@ -3,6 +3,8 @@
 
 #include "CRPickupItemSpawner.h"
 
+#include "CanRecycling/DataAssets/Item/DataAsset_ItemConfig.h"
+#include "CanRecycling/Items/CRPickupItem.h"
 #include "CanRecycling/Subsystem/CRItemSpawnerManageSubsystem.h"
 #include "Components/ArrowComponent.h"
 
@@ -12,6 +14,7 @@ ACRPickupItemSpawner::ACRPickupItemSpawner()
 	ArrowComponent = CreateDefaultSubobject<UArrowComponent>(TEXT("ArrowComponent"));
 	ArrowComponent->SetArrowColor(FColor::Yellow);
 	ArrowComponent->SetArrowSize(.3f);
+	SetRootComponent(ArrowComponent);
 }
 
 void ACRPickupItemSpawner::BeginPlay()
@@ -27,4 +30,16 @@ void ACRPickupItemSpawner::BeginPlay()
 	UCRItemSpawnerManageSubsystem* Manager = GetWorld()->GetSubsystem<UCRItemSpawnerManageSubsystem>();
 	if (IsValid(Manager))
 		Manager->RegisterItemSpawner(this);
+
+	if (ItemData->bSpawnOnBeginPlay)
+		SpawnItem();
+}
+
+void ACRPickupItemSpawner::SpawnItem()
+{
+	FActorSpawnParameters SpawnParams;
+	
+	SpawnedItem = GetWorld()->SpawnActor<ACRPickupItem>(ItemData->PickupItemClass, GetActorLocation(), GetActorRotation(), SpawnParams);
+	if (IsValid(SpawnedItem))
+		SpawnedItem->SetActorHiddenInGame(true);
 }

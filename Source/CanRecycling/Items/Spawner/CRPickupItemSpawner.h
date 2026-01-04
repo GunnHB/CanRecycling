@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "CRPickupItemSpawner.generated.h"
 
+class ACRPickupItem;
 class UDataAsset_ItemConfig;
 class UArrowComponent;
 
@@ -20,11 +21,16 @@ public:
 	virtual void BeginPlay() override;
 
 protected:
+	void SpawnItem();
+	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Components|Core")
 	TObjectPtr<UArrowComponent> ArrowComponent = nullptr;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Data")
 	TObjectPtr<UDataAsset_ItemConfig> ItemData = nullptr;
+
+	UPROPERTY()
+	TObjectPtr<ACRPickupItem> SpawnedItem = nullptr;
 	
 	FTimerHandle RespawnTimer;
 };
