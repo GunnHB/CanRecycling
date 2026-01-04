@@ -3,6 +3,7 @@
 
 #include "CRPickupItemSpawner.h"
 
+#include "CanRecycling/Subsystem/CRItemSpawnerManageSubsystem.h"
 #include "Components/ArrowComponent.h"
 
 
@@ -22,4 +23,8 @@ void ACRPickupItemSpawner::BeginPlay()
 	// todo: Register spawner with the subsystem
 	if (HasAuthority() == false)
 		return;
+
+	UCRItemSpawnerManageSubsystem* Manager = GetWorld()->GetSubsystem<UCRItemSpawnerManageSubsystem>();
+	if (IsValid(Manager))
+		Manager->RegisterItemSpawner(this);
 }
