@@ -18,6 +18,7 @@ public class CanRecycling : ModuleRules
 			"ChaosVehicles",
 			"PhysicsCore",
 			"GameplayTags",
+			"Niagara",
 		});
 	}
 }
