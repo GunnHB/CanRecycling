@@ -6,8 +6,11 @@
 #include "GameFramework/Actor.h"
 #include "CRPickupItem.generated.h"
 
+class UNiagaraSystem;
 class USphereComponent;
 class UNiagaraComponent;
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnItemTake);
 
 UCLASS()
 class CANRECYCLING_API ACRPickupItem : public AActor
@@ -21,12 +24,19 @@ public:
 
 	void SetActive(const bool bActive);
 
+	bool GetIsActivated() const {return bIsActivated;}
+
+	UPROPERTY()
+	FOnItemTake OnItemTake;
+
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Components|Core")
 	TObjectPtr<USphereComponent> SphereComponent = nullptr;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Components|Niagara")
 	TObjectPtr<UNiagaraComponent> NiagaraComponent = nullptr;
+
+	bool bIsActivated = false;
 
 private:
 	UFUNCTION()

@@ -3,6 +3,7 @@
 
 #include "CRPickupItemSpawner.h"
 
+#include "CanRecycling/DebugHelper.h"
 #include "CanRecycling/DataAssets/Item/DataAsset_ItemConfig.h"
 #include "CanRecycling/Items/CRPickupItem.h"
 #include "CanRecycling/Subsystem/CRItemSpawnerManageSubsystem.h"
@@ -30,9 +31,8 @@ void ACRPickupItemSpawner::BeginPlay()
 	UCRItemSpawnerManageSubsystem* Manager = GetWorld()->GetSubsystem<UCRItemSpawnerManageSubsystem>();
 	if (IsValid(Manager))
 		Manager->RegisterItemSpawner(this);
-
-	if (ItemData->bSpawnOnBeginPlay)
-		SpawnItem();
+	
+	SpawnItem();
 }
 
 void ACRPickupItemSpawner::SpawnItem()
@@ -40,6 +40,24 @@ void ACRPickupItemSpawner::SpawnItem()
 	FActorSpawnParameters SpawnParams;
 	
 	SpawnedItem = GetWorld()->SpawnActor<ACRPickupItem>(ItemData->PickupItemClass, GetActorLocation(), GetActorRotation(), SpawnParams);
-	// if (IsValid(SpawnedItem))
-	// 	SpawnedItem->SetActive(false);
+
+	if (IsValid(SpawnedItem))
+	{
+		SpawnedItem->SetActive(ItemData->bSpawnOnBeginPlay);
+
+		SpawnedItem->OnItemTake.AddDynamic(this, &ACRPickupItemSpawner::StartRespawnTimer);
+	}
+}
+
+void ACRPickupItemSpawner::RespawnItem()
+{
+	Debug::Print("RespawnItem");
+
+	if (IsValid(SpawnedItem))
+		SpawnedItem->SetActive(true);
+}
+
+void ACRPickupItemSpawner::StartRespawnTimer()
+{
+	GetWorld()->GetTimerManager().SetTimer(RespawnTimer, this, &ACRPickupItemSpawner::RespawnItem, ItemData->RespawnTime, false);
 }

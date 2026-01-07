@@ -22,6 +22,10 @@ public:
 
 protected:
 	void SpawnItem();
+	void RespawnItem();
+
+	UFUNCTION()
+	void StartRespawnTimer();
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Components|Core")
 	TObjectPtr<UArrowComponent> ArrowComponent = nullptr;
